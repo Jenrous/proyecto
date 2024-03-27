@@ -27,7 +27,7 @@ export class PagVehiculoComponent implements OnInit {
       "modelo": ['', [Validators.required]],
       "anio": ['', [Validators.required]],
       "color": [],
-      "kilometraje": [],
+      "kilometraje": ['', [Validators.required]],
       "precio": [],
       "calificacion": ['', [Validators.required]]
 
@@ -39,20 +39,20 @@ export class PagVehiculoComponent implements OnInit {
 
     this.route.params.subscribe(params => {
 
-      this.vehiculoService.getvehiculo(params['codigo']).subscribe(respuesta => {
-        if (respuesta.codigo == '1') {
-          this.vehiculo = respuesta.data;
+      this.vehiculoService.getvehiculo(params['codigo']).subscribe(data=> {
+        if (data.codigo == '1') {
+          this.vehiculo = data.data;
           this.formulario.controls['codigo'].setValue(this.vehiculo?.codigo);
           this.formulario.controls['marca'].setValue(this.vehiculo?.marca);
           this.formulario.controls['modelo'].setValue(this.vehiculo?.modelo);
           this.formulario.controls['anio'].setValue(this.vehiculo?.anio);
-          this.formulario.controls['calificacion'].setValue(this.vehiculo?.calificacion);
-          this.formulario.controls['precio'].setValue(this.vehiculo?.precio);
           this.formulario.controls['kilometraje'].setValue(this.vehiculo?.kilometraje);
+          this.formulario.controls['precio'].setValue(this.vehiculo?.precio);
+          this.formulario.controls['calificacion'].setValue(this.vehiculo?.calificacion);
         } else {
           Swal.fire({
             title: "Mensaje de alerta",
-            text: "No se pudo cargar la informacion",
+            text: "No se pudo cargar la información",
             icon: "error"
           });
         }
@@ -65,11 +65,17 @@ export class PagVehiculoComponent implements OnInit {
 
   guardar() {
     if (this.formulario.valid) {
-      this.vehiculoService.actualizarVehiculo({ ...this.formulario.value }, this.formulario.controls['codigo'].value).subscribe(data => {
+      this.vehiculoService.actualizarVehiculo({ ...this.formulario.value}, this.formulario.controls['codigo'].value).subscribe(data => {
         if (data.codigo == '1') {
           Swal.fire({
             title: "Mensaje",
-            text: "Vehiculo actualizado con exito",
+            text: "Vehículo actualizado con éxito",
+            icon: "info"
+          });
+        } else{
+          Swal.fire({
+            title: "Mensaje",
+            text: "No se pudo actualizar: "+data.mensaje,
             icon: "info"
           });
         }
@@ -77,7 +83,7 @@ export class PagVehiculoComponent implements OnInit {
     }else{
       Swal.fire({
         title: "Mensaje",
-        text: "Faltan CCAMPOS por LLENAR",
+        text: "Faltan campos por llenar",
         icon: "error"
       });
     }

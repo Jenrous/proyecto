@@ -24,7 +24,7 @@ set filtro(data:string){
   this.consultaVehiculos();
 }
 
-
+  // Creo que este es el error, no me lleva a ningun lado
 @Input() valor:string= '';
 ListaVehiculos: Array<Vehiculo>| Vehiculo|any =[];
 
@@ -75,10 +75,10 @@ recepcion(dato:number){
 
 eliminar(codigo:string){
   Swal.fire({
-    title: "Do you want to save the changes?",
+    title: "De verdad quiere eliminar su carrito?",
     showCancelButton: true,
-    confirmButtonText: "Save",
-    cancelButtonText: "NO"
+    confirmButtonText: "Sí",
+    cancelButtonText: "No"
   }).then ( (res)=> {
     if(res.isConfirmed){
       this.vehiculosService.eliminarVehiculo(codigo).subscribe(data =>{
@@ -86,7 +86,7 @@ eliminar(codigo:string){
           this.consultaVehiculos()
           Swal.fire({
             title: "mensaje",
-            text: "vehiculo eliminado",
+            text: "Vehículo eliminado",
             icon: "success"
           });
         }

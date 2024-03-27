@@ -49,13 +49,15 @@ export class PagVehiculoRegistroComponent implements OnInit {
           if(respuesta.codigo == '1'){
             Swal.fire({
               title: "The Internet?",
-              text: "That thing is still around?",
-              icon: "question"
+              text: "Su vehículo fue grabado con éxito",
+              icon: "success"
+            }).then (res =>{
+              this.formulario.reset();
             });
           }else {
             Swal.fire({
               title: "Mensaje",
-              text: "No se puede registrar el vehiculo:" + respuesta.mensaje,
+              text: "No se puede registrar el vehículo:" + respuesta.mensaje,
               icon: "error"
             });
           }
@@ -64,7 +66,7 @@ export class PagVehiculoRegistroComponent implements OnInit {
     }else{
       Swal.fire({
         title: "Mensaje",
-        text: "Faltan llenar campos?",
+        text: "Faltan campos por llenar",
         icon: "error"
 
       });

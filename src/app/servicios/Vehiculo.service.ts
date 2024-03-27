@@ -9,14 +9,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class VehiculoService {
 
   constructor(private http: HttpClient) { }
-  baseUrL = "https://epico.gob.ec/vehiculo/";
+  baseUrL = "https://epico.gob.ec/vehiculo/public/api/vehiculos/";
 
   httpOptions= {
-    headers: new HttpHeaders ({'Content-Type': 'application/json'})
+    // headers: new HttpHeaders ({'Content-Type': 'application/json'})
   };
 
 
-  getVehiculos():Observable<Vehiculo[]> {
+  getVehiculos() {
     return this.http.get<Respuesta>(this.baseUrL+"vehiculos/").pipe (
       map(respuesta => {
         let lista: Array<Vehiculo> =[];
@@ -30,20 +30,20 @@ export class VehiculoService {
 insertVehiculo (vehiculo: Vehiculo){
  
 
-  return this.http.post<Respuesta>(this.baseUrL+"vehiculo/",vehiculo, this.httpOptions);
+  return this.http.post<Respuesta>(this.baseUrL+"vehiculo/",vehiculo );
 
 }
 
 
-getvehiculo(codigo: string): Observable <Respuesta> {
-  return this.http.get<Respuesta>(this.baseUrL+'vehiculo/'+ codigo)
+getvehiculo(codigo: string){
+  return this.http.get<Respuesta>(this.baseUrL+"vehiculo/"+ codigo);
 }
 actualizarVehiculo (vehiculo:Vehiculo, codigo: string){
-  return this.http.put<Respuesta>(this.baseUrL+'vehiculo/'+ codigo, vehiculo, this.httpOptions)
+  return this.http.put<Respuesta>(this.baseUrL+"vehiculo/"+ codigo, vehiculo, this.httpOptions);
 }
 
 eliminarVehiculo (codigo:string){
-  return this.http.delete<Respuesta>(this.baseUrL+'vehiculo/'+ codigo);
+  return this.http.delete<Respuesta>(this.baseUrL+"vehiculo/"+ codigo);
 }
 
 
@@ -80,13 +80,13 @@ eliminarVehiculo (codigo:string){
 
 
   private ListaVehiculos: Array<Vehiculo> = [
-    { "codigo": "A001", "marca": "CHEVROLET", "modelo": "ONIX-6", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": null, "anio": 2024, "calificacion": 3 },
-    { "codigo": "A002", "marca": "KIA", "modelo": "RIO-2", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": null, "anio": 2024, "calificacion": 4 },
-    { "codigo": "A003", "marca": "CHERRY", "modelo": "ARRIZO", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": "https://cdn.wheel-size.com/thumbs/29/65/2965cba9029ea238b9ab49354d33551a.jpg", "anio": 2024, "calificacion": 4 },
-    { "codigo": "A004", "marca": "TOYOTA", "modelo": "AGYA", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": "https://www.shutterstock.com/image-photo/passenger-car-isolated-on-white-600nw-2288114495.jpg", "anio": 2024, "calificacion": 5 },
-    { "codigo": "A0005", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
-    { "codigo": "A0006", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
-    { "codigo": "A0007", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": "50000", "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
+    { "codigo": "A001", "marca": "CHEVROLET", "modelo": "ONIX-6", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": null, "anio": 2024, "calificacion": 3 },
+    { "codigo": "A002", "marca": "KIA", "modelo": "RIO-2", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": null, "anio": 2024, "calificacion": 4 },
+    { "codigo": "A003", "marca": "CHERRY", "modelo": "ARRIZO", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": "https://cdn.wheel-size.com/thumbs/29/65/2965cba9029ea238b9ab49354d33551a.jpg", "anio": 2024, "calificacion": 4 },
+    { "codigo": "A004", "marca": "TOYOTA", "modelo": "AGYA", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": "https://www.shutterstock.com/image-photo/passenger-car-isolated-on-white-600nw-2288114495.jpg", "anio": 2024, "calificacion": 5 },
+    { "codigo": "A0005", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
+    { "codigo": "A0006", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
+    { "codigo": "A0007", "marca": "HYUNDAY", "modelo": "ACCENT", "color": "AZUL", "kilometraje": 50000, "precio": 17000, "foto": "https://dealernew.com.ec/wp-content/uploads/2021/06/D_NQ_NP_656377-MEC43833916162_102020-O.jpg", "anio": 2024, "calificacion": 5 },
   ];
 }
 
